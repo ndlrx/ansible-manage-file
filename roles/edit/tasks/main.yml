@@ -1,0 +1,33 @@
+---
+# tasks file for edit
+
+- name: Insert after marker regex, backup, and validate
+  blockinfile:
+    path: /etc/ssh/sshd_config
+    backup: yes
+    marker: "# {mark} ANSIBLE MANAGED BLOCK "
+    insertafter: '^UsePAM '
+    block: |
+      AllowUsers hakase vagrant
+      ClientAliveInterval 360
+      ClientAliveCountMax 0
+    validate: '/usr/sbin/sshd -T -f %s'
+
+- name: Lineinfile 
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    backup: yes
+    regexp: '^#Port'
+    line: 'Port 22'
+
+- name: Insert line after regex and validate
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^PasswordAuthentication '
+    insertafter: '^#PasswordAuthentication '
+    line: 'PasswordAuthentication no'
+    validate: '/usr/sbin/sshd -T -f %s'
+
+
+
+

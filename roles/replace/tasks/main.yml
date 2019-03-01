@@ -1,0 +1,25 @@
+---
+# tasks file for replace
+
+- name: Replace default
+  replace:
+    path: /etc/hosts
+    regexp: '(\s+)node\.provision\.labs(\s+.*)?$'
+    replace: '\1box.provision.labs\2'
+    backup: yes
+
+- name: Uncomment configuration
+  replace:
+    path: /etc/ssh/sshd_config
+    regexp: '^#HostKey '
+    after: '#ListenAddress '
+    replace: 'HostKey '
+    backup: yes
+
+- name: Comment line
+  replace:
+    path: /etc/ssh/sshd_config
+    regexp: '^HostKey '
+    before: '#PubkeyAuthentication '
+    replace: '#HostKey '
+    backup: yes

@@ -1,0 +1,27 @@
+---
+# tasks file for copy
+
+- name: Copy Local to Remote
+  copy:
+    src: default
+    dest: /etc/nginx/sites-available/test
+
+- name: Copy file on Remote Machine
+  copy:
+    src: /etc/sudoers.d/hakase
+    dest: /home/hakase/priv.txt
+    remote_src: yes
+
+- name: Copy and backup
+  copy:
+    src: default
+    dest: /etc/nginx/sites-available/default
+    backup: yes
+
+- name: Copy file with Permission and Userr Owner
+  copy:
+    src: default
+    dest: /etc/nginx/sites-available/test2
+    owner: root
+    group: hakase
+    mode: '0644'

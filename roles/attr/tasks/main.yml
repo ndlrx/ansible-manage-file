@@ -1,0 +1,25 @@
+---
+# tasks file for attr
+
+- name: Change Permission and Owner of file
+  file:
+    path: /etc/nginx/nginx.conf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Create Symlink of file
+  file:
+    src: /etc/nginx/sites-available/test
+    dest: /etc/nginx/sites-enabled/test
+    owner: root
+    group: root
+    state: link
+
+- name: Create a New Directory using file
+  file:
+    path: /etc/nginx/ssl
+    state: directory
+    owner: root
+    group: root
+    mode: 0755

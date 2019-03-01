@@ -1,0 +1,15 @@
+---
+# tasks file for fetch
+
+- name: Download Configuration Local
+  become: yes
+  fetch:
+    src: /etc/nginx/nginx.conf
+    dest: /home/hakase/backup/
+
+- name: Download to specify directory
+  become: yes
+  fetch:
+    src: /etc/nginx/sites-available/default
+    dest: /home/hakase/backup/
+    flat: yes
